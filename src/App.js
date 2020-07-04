@@ -1,13 +1,13 @@
-import React,{Component} from 'react';
-import {Line} from 'react-chartjs-2';
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 import './App.css'
-import { isCompositeComponent } from 'react-dom/test-utils';
+// import { isCompositeComponent } from 'react-dom/test-utils';
 
 
 
 
 // const states = (props) => {(
- 
+
 //   labels: ['January', 'February', 'March',
 //            'April', 'May'],
 //   datasets: [
@@ -22,25 +22,25 @@ import { isCompositeComponent } from 'react-dom/test-utils';
 //     }
 //   ]
 // )}
-const Graph =(props)=>{
- 
+const Graph = (props) => {
+
 
   console.log(props.data)
   // console.log()
-  return(<Line
-  data={props.data}
-  options={{
-    title:{
-      display:true,
-      text:'Bitcoin',
-      fontSize:20
-    },
-    legend:{
-      display:true,
-      position:'right'
-    }
-  }}
-/>)
+  return (<Line
+    data={props.data}
+    options={{
+      title: {
+        display: true,
+        text: 'Bitcoin',
+        fontSize: 20
+      },
+      legend: {
+        display: true,
+        position: 'right'
+      }
+    }}
+  />)
 
 }
 
@@ -52,7 +52,7 @@ const Curency = () => {
   //    { currency}
   //   </li>
   // });
-  const supported_currencies = [ { currency: "INR", country: "Indian Rupee" },
+  const supported_currencies = [{ currency: "INR", country: "Indian Rupee" },
   { currency: "JPY", country: "Japanese Yen" },
   { currency: "NZD", country: "New Zealand Dollar" },
   { currency: "CAD", country: "Canadian Dollar" },
@@ -78,14 +78,14 @@ const Curency = () => {
   { currency: "BMD", country: "Bermudan Dollar" },
   { currency: "BND", country: "Brunei Dollar" },
   { currency: "BOB", country: "Bolivian Boliviano" },
-  
+
   { currency: "BSD", country: "Bahamian Dollar" },
   { currency: "BTC", country: "Bitcoin" },
   { currency: "BTN", country: "Bhutanese Ngultrum" },
   { currency: "BWP", country: "Botswanan Pula" },
   { currency: "BYR", country: "Belarusian Ruble" },
   { currency: "BZD", country: "Belize Dollar" },
-  
+
   { currency: "CDF", country: "Congolese Franc" },
   { currency: "CHF", country: "Swiss Franc" },
   { currency: "CLF", country: "Chilean Unit of Account (UF)" },
@@ -104,7 +104,7 @@ const Curency = () => {
   { currency: "EGP", country: "Egyptian Pound" },
   { currency: "ERN", country: "Eritrean Nnakfa" },
   { currency: "ETB", country: "Ethiopian Birr" },
- 
+
   { currency: "FJD", country: "Fijian Dollar" },
   { currency: "FKP", country: "Falkland Islands Pound" },
   { currency: "GBP", country: "British Pound Sterling" },
@@ -122,14 +122,14 @@ const Curency = () => {
   { currency: "HUF", country: "Hungarian Forint" },
   { currency: "IDR", country: "Indonesian Rupiah" },
   { currency: "ILS", country: "Israeli New Sheqel" },
- 
+
   { currency: "IQD", country: "Iraqi Dinar" },
   { currency: "IRR", country: "Iranian Rial" },
   { currency: "ISK", country: "Icelandic Kr\u00f3na" },
   { currency: "JEP", country: "Jersey Pound" },
   { currency: "JMD", country: "Jamaican Dollar" },
   { currency: "JOD", country: "Jordanian Dinar" },
- 
+
   { currency: "KES", country: "Kenyan Shilling" },
   { currency: "KGS", country: "Kyrgystani Som" },
   { currency: "KHR", country: "Cambodian Riel" },
@@ -167,7 +167,7 @@ const Curency = () => {
   { currency: "NIO", country: "Nicaraguan C\u00f3rdoba" },
   { currency: "NOK", country: "Norwegian Krone" },
   { currency: "NPR", country: "Nepalese Rupee" },
- 
+
   { currency: "OMR", country: "Omani Rial" },
   { currency: "PAB", country: "Panamanian Balboa" },
   { currency: "PEN", country: "Peruvian Nuevo Sol" },
@@ -206,7 +206,7 @@ const Curency = () => {
   { currency: "TZS", country: "Tanzanian Shilling" },
   { currency: "UAH", country: "Ukrainian Hryvnia" },
   { currency: "UGX", country: "Ugandan Shilling" },
- 
+
   { currency: "UYU", country: "Uruguayan Peso" },
   { currency: "UZS", country: "Uzbekistan Som" },
   { currency: "VEF", country: "Venezuelan Bol\u00edvar Fuerte" },
@@ -216,8 +216,8 @@ const Curency = () => {
   { currency: "XAF", country: "CFA Franc BEAC" },
   { currency: "XAG", country: "Silver (troy ounce)" },
   { currency: "XAU", country: "Gold (troy ounce)" },
-  { currency: "XBT", country: "Bitcoin" }, 
-  {currency: "XCD", country: "East Caribbean Dollar"},
+  { currency: "XBT", country: "Bitcoin" },
+  { currency: "XCD", country: "East Caribbean Dollar" },
   { currency: "XDR", country: "Special Drawing Rights" },
   { currency: "XOF", country: "CFA Franc BCEAO" },
   { currency: "XPF", country: "CFP Franc" },
@@ -239,91 +239,93 @@ const Curency = () => {
 export class App extends Component {
   state = {
     temp: '',
-     base: [],
+    base: [],
     USD: [],
     convert_rate: '',
-    historical_key : [],
-    historical_value : []
-    
+    historical_key: [],
+    historical_value: []
+
   }
   componentDidMount() {
 
-  // console.log(this.state.base)
-  const code='USD';
-  fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
-      
-    .then(resp => resp.json())
+    // console.log(this.state.base)
+    const code = 'USD';
+    fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
 
-    .then( data => {
-  //     console.log(data)
+      .then(resp => resp.json())
+
+      .then(data => {
+        //     console.log(data)
 
 
-  //    const base = Object.values(data.bpi)[1].rate_float  
-  //   //  let value = data.bpi.INR.rate_float; // this is hard-coded ,
+        //    const base = Object.values(data.bpi)[1].rate_float  
+        //   //  let value = data.bpi.INR.rate_float; // this is hard-coded ,
 
-  //    console.log(base ) 
-  /**************Doubt***********************/
-  //  let value = `data.bpi.${code}.rate_float`; 
+        //    console.log(base ) 
+        /**************Doubt***********************/
+        //  let value = `data.bpi.${code}.rate_float`; 
 
-  //  console.log(value) // gives a string : "data.bpi.INR.rate_float" , but doesnt call it 
+        //  console.log(value) // gives a string : "data.bpi.INR.rate_float" , but doesnt call it 
 
-  const USD = data.bpi.USD;
-    this.setState({
-      USD
-    })
-  })
-  //   const code='INR';
-  //   fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
-  //   // fetch("https://v6.exchangerate-api.com/v6/6948efe6212cdb78c881a754/latest/USD")
-  //     .then(resp => resp.json())
-  //     // .then( => console.log(js))
-  //     .then( data => {
-  //       const INR = data.bpi.INR.rate_float;
-  //       const USD = data.bpi.USD.rate_float;
-  //       const convert_rate= INR / USD
-  //       console.log(INR)
-  //       console.log(USD)
-  //       console.log(convert_rate)
-  //     }
+        const USD = data.bpi.USD;
+        this.setState({
+          USD
+        })
+      })
+    //   const code='INR';
+    //   fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
+    //   // fetch("https://v6.exchangerate-api.com/v6/6948efe6212cdb78c881a754/latest/USD")
+    //     .then(resp => resp.json())
+    //     // .then( => console.log(js))
+    //     .then( data => {
+    //       const INR = data.bpi.INR.rate_float;
+    //       const USD = data.bpi.USD.rate_float;
+    //       const convert_rate= INR / USD
+    //       console.log(INR)
+    //       console.log(USD)
+    //       console.log(convert_rate)
+    //     }
 
-  //     )
+    //     )
 
-  //     this.setState({
+    //     this.setState({
 
-  //     })
+    //     })
 
 
   }
-  handleGraph=(e)=>{
-    fetch("https://api.coindesk.com/v1/bpi/historical/close.json?start=2020-06-28&end=2020-07-03")
-    .then(resp=>resp.json())
-    // .then(data=>console.log(data.bpi))
-    .then( data=>{
-      var  historical_key = [],
-     historical_value = [];
-      console.log(data.bpi)
-      var newData=data.bpi
-      console.log(newData)
-  for (var property in newData) {
+  handleGraph = (e) => {
+    var todayDate = new Date().toISOString().slice(0,10);
+    console.log(todayDate)
+    fetch(`https://api.coindesk.com/v1/bpi/historical/close.json?end=${todayDate}`)
+      .then(resp => resp.json())
+      // .then(data=>console.log(data.bpi))
+      .then(data => {
+        var historical_key = [],
+          historical_value = [];
+        console.log(data.bpi)
+        var newData = data.bpi
+        console.log(newData)
+        for (var property in newData) {
 
-   if ( ! newData.hasOwnProperty(property)) {
-      continue;
-   }
+          if (!newData.hasOwnProperty(property)) {
+            continue;
+          }
 
-    historical_key.push(property);
-    historical_value.push(newData[property]*this.state.convert_rate);
+          historical_key.push(property);
+          historical_value.push(newData[property] * this.state.convert_rate);
 
-}
-      console.log( historical_key);
-      console.log( historical_value)
-      this.setState({
-        historical_key,
-        historical_value
+        }
+        console.log(historical_key);
+        console.log(historical_value)
+        this.setState({
+          historical_key,
+          historical_value
+        })
       })
-    })
-    
+
     // .then(<Graph data={this.graphData}/>)
-    
+
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -366,75 +368,92 @@ export class App extends Component {
     })
     console.log(this.state.temp)
   }
- 
+
 
   render() {
-   const  graphData = {
-  
-      labels: this.state.historical_key ,
-    datasets: [{
-    label: 'BitCoin',
-    fill: true,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(75,192,192,1)',
-    borderColor: 'rgba(0,0,0,1)',
-    borderWidth: 2,
-    data: this.state.historical_value
-    
+    const graphData = {
+
+      labels: this.state.historical_key,
+      datasets: [{
+        label: '1 BTC ',
+        fill: false,
+        lineTension: 0.5,
+        backgroundColor: 'rgba(75,192,192,1)',
+        // borderColor: 'rgba(0,0,0,1)', 
+         borderColor: `rgb(125,102,100,1)`, 
+        borderWidth: 2.5,
+        data: this.state.historical_value 
+
+      }
+      ]
     }
-    ]
-     }
     console.log(this.state.historical_key);
     return (
       <div className="wallpaper">
-      <div className="container ">
+        <div className="container ">
 
 
-       
 
-        <div className="container  mt-3 ">
-        <h1 className="jumbotron mt-3" >  $ {this.state.USD.rate}  </h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            {/* <input  autoComplete="on" list="country"/> */}
-        Choose your currency
+
+          <div className="container  mt-3 ">
+            <div className="jumbotron mt-3 bg-dark text-white">
+            <h2> Live Bitcoin Price</h2>
+            <h1 >   $ {this.state.USD.rate} {this.state.USD.code} </h1>
+            </div>
+            <form onSubmit={this.handleSubmit}>
+              
+               
+                {/* <input  autoComplete="on" list="country"/> */}
+               
+                <label className="bg-dark d-flex p-3  justify-content-center">
+
+                
+                <span className="text-warning px-3">  Choose your currency    </span>
+                
           {/* <datalist id ="country" value={this.state.temp} onChange={this.handleChange}  > */}
-            <select id="country" value={this.state.temp} onChange={this.handleChange}  >
-              {/* <select id ="country" value={this.state.temp} onChange={this.handleChange}  > */}
-              <option value="" disabled>Select an option</option>
+                <select  value={this.state.temp} onChange={this.handleChange}  >
+                  {/* <select id ="country" value={this.state.temp} onChange={this.handleChange}  > */}
+                  <option value="" disabled>Select an option</option>
 
-              <Curency />
+                  <Curency />
 
 
-            </select>
-            {/* </datalist> */}
-          </label>
-
-          <button className="btn btn-warning"type="submit" value="Submit" onClick={this.handleSubmit} >sd
+                </select>
+                   
+              <button className="btn btn-outline-success pl-2 ml-2 text-white" type="submit" value="Submit" onClick={this.handleSubmit}>Submit 
           </button>
+                {/* </datalist> */}
+                
+                </label>
+           
 
-        
-        </form>
-        
-          <div className="jumbotron ">
-            <h1 > {this.state.base.rate} </h1>
-            <span>{this.state.base.description}</span>
-              </div>
-         
-          <h2 className="jumbotron"> {this.state.convert_rate} </h2>
+
+            </form>
+
+            <div className="jumbotron  bg-dark text-white">
+              <h1>  {this.state.base.rate} {this.state.base.code}</h1>
+              <span>{this.state.base.description}</span>
+             
+            </div>
+      
+            {/* <h2 className="jumbotron"> {this.state.convert_rate} </h2> */}
+
+          </div>
+          
+          
+          <div>
+            {/* <states props={this.state} /> */}
+        <div className="container bg-dark d-flex justify-content-center p-3">
+        <button className="btn btn-outline-light text-gray font-weight-bold" type="submit" value="graph" onClick={this.handleGraph} > Get 30 days data
+          </button>
+          </div>
+          <div className="bg-dark">     
+          
+           <Graph data={graphData} />
+          </div>
 
         </div>
-        <div>
-          {/* <states props={this.state} /> */}
-        
-          <button className="btn btn-warning"type="submit" value="graph" onClick={this.handleGraph} >sd
-          </button>
-      </div>
-
-      <Graph data={graphData}/>
-
-      </div>
-      </div>
+      </div></div>
     )
   }
 }
