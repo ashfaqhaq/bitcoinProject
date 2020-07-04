@@ -405,13 +405,13 @@ export class App extends Component {
                
                 {/* <input  autoComplete="on" list="country"/> */}
                
-                <label className="bg-dark d-flex p-3  justify-content-center">
+                <div className="bg-dark  p-3 ">
 
                 
-                <span className="text-warning px-3">  Choose your currency    </span>
+             <label className="text-warning d-block text-center font-weight-bold">  Choose your currency </label> 
                 
           {/* <datalist id ="country" value={this.state.temp} onChange={this.handleChange}  > */}
-                <select  value={this.state.temp} onChange={this.handleChange}  >
+                <div className="d-flex justify-content-center mx-2 p-2 "><select  value={this.state.temp} onChange={this.handleChange}  >
                   {/* <select id ="country" value={this.state.temp} onChange={this.handleChange}  > */}
                   <option value="" disabled>Select an option</option>
 
@@ -419,12 +419,14 @@ export class App extends Component {
 
 
                 </select>
-                   
-              <button className="btn btn-outline-success pl-2 ml-2 text-white" type="submit" value="Submit" onClick={this.handleSubmit}>Submit 
+                </div>
+            <div className="d-flex justify-content-center mt-2">  <button className="btn btn-outline-success pl-2 ml-2 text-white " type="submit" value="Submit" onClick={this.handleSubmit}>Submit 
+          
           </button>
+          </div>
                 {/* </datalist> */}
                 
-                </label>
+                </div>
            
 
 
