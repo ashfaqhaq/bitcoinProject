@@ -2,24 +2,7 @@ import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import "./App.css";
 import supported_currencies from "./data/currency";
-// import { isCompositeComponent } from 'react-dom/test-utils';
 
-// const states = (props) => {(
-
-//   labels: ['January', 'February', 'March',
-//            'April', 'May'],
-//   datasets: [
-//     {
-//       label: 'Rainfall',
-//       fill: true,
-//       lineTension: 0.5,
-//       backgroundColor: 'rgba(75,192,192,1)',
-//       borderColor: 'rgba(0,0,0,1)',
-//       borderWidth: 2,
-//       data: [65, 59, 80, 81, 56]
-//     }
-//   ]
-// )}
 const Graph = (props) => {
   console.log(props.data);
   // console.log()
@@ -56,6 +39,10 @@ const Curency = () => {
   return listItems;
 };
 
+
+
+
+
 export class App extends Component {
   state = {
     temp: "",
@@ -88,25 +75,7 @@ export class App extends Component {
           USD
         });
       });
-    //   const code='INR';
-    //   fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
-    //   // fetch("https://v6.exchangerate-api.com/v6/6948efe6212cdb78c881a754/latest/USD")
-    //     .then(resp => resp.json())
-    //     // .then( => console.log(js))
-    //     .then( data => {
-    //       const INR = data.bpi.INR.rate_float;
-    //       const USD = data.bpi.USD.rate_float;
-    //       const convert_rate= INR / USD
-    //       console.log(INR)
-    //       console.log(USD)
-    //       console.log(convert_rate)
-    //     }
-
-    //     )
-
-    //     this.setState({
-
-    //     })
+ 
   }
   handleGraph = (e) => {
     var todayDate = new Date().toISOString().slice(0, 10);
