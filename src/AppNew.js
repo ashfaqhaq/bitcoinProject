@@ -123,7 +123,9 @@ const  AppNew = () => {
 
     return (
         <div>
-            <h1> {usd.rate_float} </h1>
+        <h1>   {temp_input ? 
+          <div> {currency}</div>:<div>{usd.rate_float}</div>}
+          </h1>
             <button>   adsasd </button>
             <button
                     className="btn btn-outline-success pl-2 ml-2 text-white "
@@ -136,8 +138,7 @@ const  AppNew = () => {
                   
                     
                   </button>
-                  {temp_input ? 
-                    <div> {currency}</div>:<div>waiting</div>}
+                  
         </div>
     )
 }
