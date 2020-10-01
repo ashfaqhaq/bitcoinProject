@@ -50,6 +50,7 @@ const  AppNew = () => {
     const [currency, setCurrency] = useState([])
     const [reload, setReload] = useState(true)
     const [temp_input, setTempInput] = useState(false)
+    // const [code,]
 
     const handleSubmit = () =>{
         console.log('asdasd');
@@ -88,26 +89,32 @@ const  AppNew = () => {
     //   };
 
     useEffect(() => {
-      const code =  temp_input ?  "IND": "USD";
+      const code =  temp_input ? "INR" : "USD"
       console.log(code);
         //  const code = "USD";
          fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
            .then((resp) => resp.json())
-     
+          // .then(data=>console.log(data))
            .then((data) => {
-            //  const USD = data.bpi.USD;
-             console.log(data.bpi.USD);
+             console.log(data)
+             const USD = data.bpi.USD;
+            // console.log(data.bpi)
+            //  console.log(data.bpi.USD);
+            
+            // console.log(Object.values(data.bpi)[1])
             const base = Object.values(data.bpi)[1];
-            const USD = data.bpi.USD;
+            // const USD = data.bpi.USD;
             
             // const convert_rate = base.rate_float / USD.rate_float;
-            console.log(base);
-            console.log(USD);
+            // console.log(base.rate);
+            // console.log(USD);
             // console.log(convert_rate);
              setUSD(USD)
+             setCurrency(base.rate)
         //      console.log(USD)
             
-           });
+           })
+           .catch ((err)=>console.log(err));
 
          return () => {
          }
@@ -125,7 +132,12 @@ const  AppNew = () => {
                     onClick={handleSubmit}
                   >
                     Submit
+
+                  
+                    
                   </button>
+                  {temp_input ? 
+                    <div> {currency}</div>:<div>waiting</div>}
         </div>
     )
 }

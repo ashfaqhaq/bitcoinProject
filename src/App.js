@@ -117,7 +117,7 @@ export class App extends Component {
       // .then( => console.log(js))
       .then((data) => {
         console.log(data);
-        // const nw=this.state.base
+        // const nw=this.state.bas
         console.log(data.bpi);
         const base = Object.values(data.bpi)[1];
         const USD = data.bpi.USD;
