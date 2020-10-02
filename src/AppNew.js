@@ -48,14 +48,16 @@ import supported_currencies from "./data/currency";
 const  AppNew = () => {
     const [usd, setUSD] = useState([])
     const [currency, setCurrency] = useState([])
-    const [reload, setReload] = useState(true)
+    // const [reload, setReload] = useState(true)
+    const [selection, setSelection] = useState('')
     const [temp_input, setTempInput] = useState(false)
     // const [code,]
 
     const handleSubmit = () =>{
         console.log('asdasd');
         // setUSD()
-        setReload(!reload)
+        // setReload(!reload)
+        setSelection('INR')
         setTempInput(true)
     }
 
@@ -89,7 +91,7 @@ const  AppNew = () => {
     //   };
 
     useEffect(() => {
-      const code =  temp_input ? "INR" : "USD"
+      const code =  temp_input ? selection : "USD"
       console.log(code);
         //  const code = "USD";
          fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
@@ -118,7 +120,7 @@ const  AppNew = () => {
 
          return () => {
          }
-     },[reload, temp_input])
+     },[temp_input, selection])
      
 
     return (
@@ -126,7 +128,7 @@ const  AppNew = () => {
         <h1>   {temp_input ? 
           <div> {currency}</div>:<div>{usd.rate_float}</div>}
           </h1>
-            <button>   adsasd </button>
+          
             <button
                     className="btn btn-outline-success pl-2 ml-2 text-white "
                     type="submit"
