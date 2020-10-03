@@ -1,48 +1,42 @@
 // import React from 'react'
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-// import 'antd/dist/antd.css';
-// import { Select } from 'antd';
+import 'antd/dist/antd.css';
+import { Select } from 'antd';
 import "./App.css";
 import supported_currencies from "./data/currency";
 import GraphComponent from './GraphComponent'
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
+
+const { Option } = Select;
+
+function onChange(value) {
+  alert(`selected ${value}`);
+}
+
+function onBlur() {
+  console.log('blur');
+}
+
+function onFocus() {
+  console.log('focus');
+}
+
+function onSearch(val) {
+  console.log('search:', val);
+}
 
 
-  const Curency = () => {
-        const listItems = supported_currencies.map((items) => (
-      <MenuItem value={items.currency}>{items.country}</MenuItem>
-    ));
-    return listItems;
-  };
-  const Curenncy = () => {
-    const listItems = supported_currencies.map((items) => (
-  <option value={items.currency}>{items.country}</option>
-));
-return listItems;
-};
+
+
+
+  
+ 
+
   
 
 const  AppNew = () => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
     const [usd, setUSD] = useState([])
     const [currency, setCurrency] = useState([])
     const [selection, setSelection] = useState('')
@@ -52,21 +46,10 @@ const  AppNew = () => {
     
 
     
-   const handleChange = (e) => {
-      // console.log(selection);
-     
-        setSelection(e.target.value)
-    
-      // console.log(this.state.temp_input);
-    };
-    
-    const handleClose = () => {
-      setOpen(false);
+   const handleChange = (value) => {  
+        setSelection(value)
     };
   
-    const handleOpen = () => {
-      setOpen(true);
-    };
 
     useEffect(() => {
       const code =  selection ? selection : "USD"
@@ -156,35 +139,33 @@ const  AppNew = () => {
         <h1>   {selection ? 
           <div> {currency.rate }</div>:<div>{usd.rate_float}</div>}
           </h1>
+          <h2>   {selection ? 
+            <div> {currency.description }</div>:<div>{usd.description}</div>}
+            </h2>
           <div className="d-flex justify-content-center mx-2 p-2 ">
          
           <div>
-      <Button className={classes.button} onClick={handleOpen}>
-        Open the select
-      </Button>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={setSelection}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-        {  supported_currencies.map((items) => (
-            <MenuItem value={items.currency}>{items.country}</MenuItem>
-          ))
-        }
-        </Select>
-      </FormControl>
+          <Select
+    showSearch
+    style={{ width: 200 }}
+    placeholder="Choose your native currency"
+    optionFilterProp="children"
+    onChange={handleChange}
+    onFocus={onFocus}
+    onBlur={onBlur}
+    onSearch={onSearch}
+    filterOption={(input, option) =>
+      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    }
+  >{  supported_currencies.map((items) => (
+    <Option value={items.currency}>{items.country}</Option>
+  ))
+}
+    
+  </Select>
+          
     </div> 
 
-    <Button color="primary">Hello World</Button>
         </div>
         
            <GraphComponent data= {graphData} /> 
