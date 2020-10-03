@@ -5,37 +5,34 @@ import { Line } from "react-chartjs-2";
 import "./App.css";
 import supported_currencies from "./data/currency";
 
-// const [state, setState] = useState({temp_input:'',base:[]})
-// const [input, setInput] = useState('')
-// const [usd, setUSD] = useState([])
-// const [base, setBase] = useState([])
-// const [convert, setConvert] = useState('')
-// const [historical, setHistorical] = useState({historical_key: [],historical_value: []})
 
 
 
 
 
-// const Graph = (props) => {
-//     console.log(props.data);
-//     // console.log()
-//     return (
-//       <Line
-//         data={props.data}
-//         options={{
-//           title: {
-//             display: true,
-//             text: "Bitcoin",
-//             fontSize: 20
-//           },
-//           legend: {
-//             display: true,
-//             position: "right"
-//           }
-//         }}
-//       />
-//     );
-//   };
+
+const Graph = (props) => {
+
+
+    console.log(props.data);
+    // console.log()
+    return (
+      <Line
+        data={props.data}
+        options={{
+          title: {
+            display: true,
+            text: "Bitcoin",
+            fontSize: 20
+          },
+          legend: {
+            display: true,
+            position: "right"
+          }
+        }}
+      />
+    );
+  };
 
   const Curency = () => {
         const listItems = supported_currencies.map((items) => (
@@ -49,6 +46,8 @@ const  AppNew = () => {
     const [usd, setUSD] = useState([])
     const [currency, setCurrency] = useState([])
     const [selection, setSelection] = useState('')
+    const [historical, setHistorical] = useState({historical_key: [],historical_value: []})
+    const [convert_rate,setConvertRate]= useState(0)
 
     
 
@@ -73,6 +72,10 @@ const  AppNew = () => {
     useEffect(() => {
       const code =  selection ? selection : "USD"
       console.log(code);
+
+
+     ( async function fetchPrice() {
+        await
         //  const code = "USD";
          fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
            .then((resp) => resp.json())
@@ -83,11 +86,52 @@ const  AppNew = () => {
              setUSD(USD)
             // console.log(data.bpi)
             //  console.log(data.bpi.USD);
-            if (code!='USD'){
+            if (code!=='USD'){
+              
+
               const base = Object.values(data.bpi)[1];
             console.log(base);
+            const rate = base.rate / USD.rate_float;
             setCurrency(base)
+            setConvertRate(rate)
             }})
+            .catch ((err)=>console.log(err));
+          })();
+    var todayDate = new Date().toISOString().slice(0, 10);
+    console.log(todayDate);
+    fetch(
+      `https://api.coindesk.com/v1/bpi/historical/close.json?end=${todayDate}`
+    )
+      .then((resp) => resp.json())
+      // .then(data=>console.log(data.bpi))
+      .then((data) => {
+        var historical_key = [],
+          historical_value = [];
+        console.log(data.bpi);
+        var newData = data.bpi;
+        console.log(newData);
+        for (var property in newData) {
+          if (!newData.hasOwnProperty(property)) {
+            continue;
+          }
+
+          historical_key.push(property);
+        // code==='USD'?  historical_value.push(newData[property]) :   historical_value.push(newData[property] * convert_rate);
+          historical_value.push(newData[property]) 
+        }
+        console.log(historical_key);
+        console.log(historical_value);
+       setHistorical({
+          historical_key,
+          historical_value
+        })
+       
+
+      });
+      // .catch ((err)=>console.log(err));
+
+    
+
             // console.log(Object.values(data.bpi)[1])
             
             // const convert_rate = base.rate_float / USD.rate_float;
@@ -99,12 +143,28 @@ const  AppNew = () => {
             //  setCon
         //      console.log(USD)
             
-           .catch ((err)=>console.log(err));
-
+          
          return () => {
          }
      },[selection])
-     
+
+
+
+     const graphData = {
+      labels: historical.historical_key,
+      datasets: [
+        {
+          label: "1 BTC ",
+          fill: false,
+          lineTension: 0.5,
+          backgroundColor: "rgba(75,192,192,1)",
+          // borderColor: 'rgba(0,0,0,1)',
+          borderColor: `rgb(125,102,100,1)`,
+          borderWidth: 2.5,
+          data: historical.historical_value
+        }
+      ]
+    };
 
     return (
         <div>
@@ -121,6 +181,8 @@ const  AppNew = () => {
 
             <Curency />
           </select>
+
+          <Graph data={graphData} />
         </div>
             
                   
