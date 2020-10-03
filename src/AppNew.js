@@ -1,27 +1,48 @@
 // import React from 'react'
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-
+// import 'antd/dist/antd.css';
+// import { Select } from 'antd';
 import "./App.css";
 import supported_currencies from "./data/currency";
-
 import GraphComponent from './GraphComponent'
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 
-
-
-
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
 
 
   const Curency = () => {
         const listItems = supported_currencies.map((items) => (
-      <option value={items.currency}>{items.country}</option>
+      <MenuItem value={items.currency}>{items.country}</MenuItem>
     ));
     return listItems;
   };
+  const Curenncy = () => {
+    const listItems = supported_currencies.map((items) => (
+  <option value={items.currency}>{items.country}</option>
+));
+return listItems;
+};
   
 
 const  AppNew = () => {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
     const [usd, setUSD] = useState([])
     const [currency, setCurrency] = useState([])
     const [selection, setSelection] = useState('')
@@ -30,23 +51,22 @@ const  AppNew = () => {
 
     
 
-    const Curency = () => {
-      
     
-      const listItems = supported_currencies.map((items) => (
-        <option value={items.currency}>{items.country}</option>
-      ));
-      return listItems;
-    };
    const handleChange = (e) => {
       // console.log(selection);
-      
+     
         setSelection(e.target.value)
     
       // console.log(this.state.temp_input);
     };
     
-    
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    const handleOpen = () => {
+      setOpen(true);
+    };
 
     useEffect(() => {
       const code =  selection ? selection : "USD"
@@ -106,30 +126,15 @@ const  AppNew = () => {
         })
        
 
-      });
-
-    
-
-            // console.log(Object.values(data.bpi)[1])
-            
-            // const convert_rate = base.rate_float / USD.rate_float;
-            // console.log(base.rate);
-            // console.log(USD);
-            // console.log(convert_rate);
-             
-             
-            //  setCon
-        //      console.log(USD)
-            
-          
+      });        
          return () => {
            
          }
      },[convert_rate, selection])
-
-
-
-     const graphData = {
+     
+     
+     
+    const graphData = {
       labels: historical.historical_key,
       datasets: [
         {
@@ -152,18 +157,37 @@ const  AppNew = () => {
           <div> {currency.rate }</div>:<div>{usd.rate_float}</div>}
           </h1>
           <div className="d-flex justify-content-center mx-2 p-2 ">
-          <select value={setSelection} onChange={handleChange}>
-            {/* <select id ="country" value={this.state.temp_input} onChange={this.handleChange}  > */}
-            <option value="" disabled>
-              Select an option
-            </option>
+         
+          <div>
+      <Button className={classes.button} onClick={handleOpen}>
+        Open the select
+      </Button>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={setSelection}
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+        {  supported_currencies.map((items) => (
+            <MenuItem value={items.currency}>{items.country}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+    </div> 
 
-            <Curency />
-          </select>
-
-          <GraphComponent data={graphData} />
+    <Button color="primary">Hello World</Button>
         </div>
-            
+        
+           <GraphComponent data= {graphData} /> 
                   
         </div>
     )
