@@ -5,34 +5,13 @@ import { Line } from "react-chartjs-2";
 import "./App.css";
 import supported_currencies from "./data/currency";
 
+import GraphComponent from './GraphComponent'
 
 
 
 
 
 
-const Graph = (props) => {
-
-
-    console.log(props.data);
-    // console.log()
-    return (
-      <Line
-        data={props.data}
-        options={{
-          title: {
-            display: true,
-            text: "Bitcoin",
-            fontSize: 20
-          },
-          legend: {
-            display: true,
-            position: "right"
-          }
-        }}
-      />
-    );
-  };
 
   const Curency = () => {
         const listItems = supported_currencies.map((items) => (
@@ -47,7 +26,7 @@ const  AppNew = () => {
     const [currency, setCurrency] = useState([])
     const [selection, setSelection] = useState('')
     const [historical, setHistorical] = useState({historical_key: [],historical_value: []})
-    const [convert_rate,setConvertRate]= useState(0)
+    const [convert_rate,setConvertRate]= useState(1)
 
     
 
@@ -60,7 +39,7 @@ const  AppNew = () => {
       return listItems;
     };
    const handleChange = (e) => {
-      console.log(selection);
+      // console.log(selection);
       
         setSelection(e.target.value)
     
@@ -71,11 +50,10 @@ const  AppNew = () => {
 
     useEffect(() => {
       const code =  selection ? selection : "USD"
-      console.log(code);
+      // console.log(code);
 
 
-     ( async function fetchPrice() {
-        await
+     
         //  const code = "USD";
          fetch(`https://api.coindesk.com/v1/bpi/currentprice/${code}.json`)
            .then((resp) => resp.json())
@@ -90,13 +68,13 @@ const  AppNew = () => {
               
 
               const base = Object.values(data.bpi)[1];
-            console.log(base);
+            // console.log(base);
             const rate = base.rate / USD.rate_float;
             setCurrency(base)
             setConvertRate(rate)
             }})
             .catch ((err)=>console.log(err));
-          })();
+        
     var todayDate = new Date().toISOString().slice(0, 10);
     console.log(todayDate);
     fetch(
@@ -107,7 +85,7 @@ const  AppNew = () => {
       .then((data) => {
         var historical_key = [],
           historical_value = [];
-        console.log(data.bpi);
+        // console.log(data.bpi);
         var newData = data.bpi;
         console.log(newData);
         for (var property in newData) {
@@ -116,11 +94,12 @@ const  AppNew = () => {
           }
 
           historical_key.push(property);
-        // code==='USD'?  historical_value.push(newData[property]) :   historical_value.push(newData[property] * convert_rate);
-          historical_value.push(newData[property]) 
-        }
-        console.log(historical_key);
-        console.log(historical_value);
+          // alert(convert_rate)
+          
+            historical_value.push(newData[property]);
+        // historical_value.push(newData[property] * convert_rate)        
+      }
+      
        setHistorical({
           historical_key,
           historical_value
@@ -128,7 +107,6 @@ const  AppNew = () => {
        
 
       });
-      // .catch ((err)=>console.log(err));
 
     
 
@@ -145,8 +123,9 @@ const  AppNew = () => {
             
           
          return () => {
+           
          }
-     },[selection])
+     },[convert_rate, selection])
 
 
 
@@ -182,7 +161,7 @@ const  AppNew = () => {
             <Curency />
           </select>
 
-          <Graph data={graphData} />
+          <GraphComponent data={graphData} />
         </div>
             
                   
