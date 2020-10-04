@@ -1,8 +1,11 @@
 // import React from 'react'
 import React, { useState, useEffect } from "react";
+import { useCountUp } from 'react-countup';
 import { Line } from "react-chartjs-2";
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
+import { Space } from 'antd';
+import { blue } from '@ant-design/colors';
 import { PageHeader } from 'antd';
 
 import "./App.css";
@@ -46,8 +49,7 @@ const AppNew = () => {
   const [convert_rate, setConvertRate] = useState(1)
 
 
-
-
+  
   const handleChange = (value) => {
     setSelection(value)
   };
@@ -137,34 +139,34 @@ const AppNew = () => {
   };
 
   return (
-    <div>
-    <PageHeader
-    className="site-page-header"
-    title="Live BTC Price"
-   
-    subTitle="This is a subtitle"
-  />
-    <Divider>Responsive</Divider>
-    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      <Col className="gutter-row" span={6}>
-        <div style={style}>{selection ?
-          <div> {currency.rate}</div> : <div>{usd.rate_float}</div>}</div>
-      </Col>
-      
-    </Row>
+    <div className="bg">
     
-      <h1>   {selection ?
+    {//} <PageHeader
+  //   className="site-page-header"
+  //   title="Live BTC Price"
+   
+  //   subTitle="This is a subtitle"
+  // />
+    }
+  <div className="content container">
+    <div className="currency">
+    
+  <Space size={20}>
+        {selection ?
         <div> {currency.rate}</div> : <div>{usd.rate_float}</div>}
-      </h1>
-      <h2>   {selection ?
-        <div> {currency.description}</div> : <div>{usd.description}</div>}
-      </h2>
-      <div className="d-flex justify-content-center mx-2 p-2 ">
-
-        <div>
+    
+       
+    </Space>
+    </div>
+    <div  className="currency desc">
+      
+      {selection ?
+        <div className="text"> {currency.description}</div> : <div  className="text">{usd.description}</div>}
+        <div className="select text">
           <Select
             showSearch
-            style={{ width: 200 }}
+            style={{ backgroundColor: 'blue' , width: 200}}
+            // dropdownStyle={{ backgroundColor: transparent }}
             placeholder="Choose your native currency"
             optionFilterProp="children"
             onChange={handleChange}
@@ -178,15 +180,16 @@ const AppNew = () => {
             <Option value={items.currency}>{items.country}</Option>
           ))
             }
-
+            Select your currency!
           </Select>
-
+            
         </div>
 
       </div>
 
       <GraphComponent data={graphData} />
 
+    </div>
     </div>
   )
 }
