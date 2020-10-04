@@ -1,6 +1,6 @@
 // import React from 'react'
 import React, { useState, useEffect } from "react";
-import { useCountUp } from 'react-countup';
+import CountUp , { useCountUp } from 'react-countup';
 import { Line } from "react-chartjs-2";
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
@@ -123,16 +123,20 @@ const AppNew = () => {
 
 
   const graphData = {
-    labels: historical.historical_key,
+    labels:historical.historical_key,
+    
+   
     datasets: [
       {
         label: "1 BTC ",
         fill: false,
         lineTension: 0.5,
-        backgroundColor: "rgba(75,192,192,1)",
+        backgroundColor: `rgba(0,255,255,1)`,
         // borderColor: 'rgba(0,0,0,1)',
-        borderColor: `rgb(125,102,100,1)`,
+        // borderColor: `rgb(125,102,100,1)`,
+        borderColor: `rgb(0,255,255,1)`,
         borderWidth: 2.5,
+        fontColor:`rgb(0,255,255,1)`,
         data: historical.historical_value
       }
     ]
@@ -153,7 +157,7 @@ const AppNew = () => {
     
   <Space size={20}>
         {selection ?
-        <div> {currency.rate}</div> : <div>{usd.rate_float}</div>}
+        <div className="accent"> {currency.rate}</div> : <div className="accent">{usd.rate_float}</div>}
     
        
     </Space>
@@ -161,8 +165,8 @@ const AppNew = () => {
     <div  className="currency desc">
       
       {selection ?
-        <div className="text"> {currency.description}</div> : <div  className="text">{usd.description}</div>}
-        <div className="select text">
+        <div className="text accent"> {currency.description}</div> : <div  className="text">{usd.description}</div>}
+        <div className="select text accent">
           <Select
             showSearch
             style={{ backgroundColor: 'blue' , width: 200}}
@@ -180,7 +184,7 @@ const AppNew = () => {
             <Option value={items.currency}>{items.country}</Option>
           ))
             }
-            Select your currency!
+            
           </Select>
             
         </div>
@@ -189,6 +193,7 @@ const AppNew = () => {
 
       <GraphComponent data={graphData} />
 
+      
     </div>
     </div>
   )

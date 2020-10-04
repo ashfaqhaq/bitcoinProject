@@ -9,10 +9,20 @@ const GraphComponent = (props) => {
           title: {
             display: true,
             text: "Bitcoin",
-            fontSize: 20
+            fontSize: 20,
+            fontColor:`rgb(0,255,255,1)`,
+            scales: {
+              yAxes: [{
+                fontColor:`rgb(0,255,255,1)`,
+                borderColor: `rgb(0,255,255,1)`,
+              }]
+          }
           },
           legend: {
             display: true,
+            borderColor: `rgb(0,255,255,1)`,
+            fontColor:`rgb(0,255,255,1)`,
+            
             position: "right"
           }
         }}
