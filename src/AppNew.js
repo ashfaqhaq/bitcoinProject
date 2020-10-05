@@ -1,19 +1,13 @@
 // import React from 'react'
 import React, { useState, useEffect } from "react";
-import CountUp , { useCountUp } from 'react-countup';
-import { Line } from "react-chartjs-2";
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { Space } from 'antd';
-import { blue } from '@ant-design/colors';
-import { PageHeader } from 'antd';
 
 import "./App.css";
 import supported_currencies from "./data/currency";
 import GraphComponent from './GraphComponent'
-import { Row, Col, Divider } from 'antd';
 
-const style = { background: '#0092ff', padding: '8px' , margin: '8px' };
 
 
 const { Option } = Select;
@@ -102,10 +96,9 @@ const AppNew = () => {
           }
 
           historical_key.push(property);
-          // alert(convert_rate)
-
+          
           historical_value.push(newData[property]);
-          // historical_value.push(newData[property] * convert_rate)        
+                 
         }
 
         setHistorical({
@@ -144,6 +137,7 @@ const AppNew = () => {
 
   return (
     <div className="bg">
+
     
     {//} <PageHeader
   //   className="site-page-header"
@@ -154,13 +148,14 @@ const AppNew = () => {
     }
   <div className="content container">
     <div className="currency">
-    
+  
   <Space size={20}>
         {selection ?
-        <div className="accent"> {currency.rate}</div> : <div className="accent">{usd.rate_float}</div>}
+        <div className="accent">  {currency.rate} </div> : <div className="accent"> {usd.rate_float} </div>}
     
        
     </Space>
+    
     </div>
     <div  className="currency desc">
       

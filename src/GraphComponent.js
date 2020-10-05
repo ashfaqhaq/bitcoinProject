@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import { Line } from "react-chartjs-2";
 import './index.css'
 
@@ -14,8 +14,8 @@ const GraphComponent = (props) => {
               display: true,
               scaleLabel: {
                   display: true,
-                  labelString: 'X axe name',
-                  fontColor:'#000000',
+                  labelString: 'Date',
+                  fontColor:'#00ffff',
                   fontSize:10
               },
               ticks: {
@@ -28,7 +28,7 @@ const GraphComponent = (props) => {
               scaleLabel: {
                   display: true,
                   labelString: 'Price in Dollars',
-                  fontColor: '#000000',
+                  fontColor: '#00ffff',
                   fontSize:10
               },
               ticks: {
