@@ -1,22 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import './index.css'
 
 const GraphComponent = (props) => {
     return (
+      <div className="accent">
+     
       <Line
         data={props.data}
         options={{
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                  display: true,
+                  labelString: 'X axe name',
+                  fontColor:'#000000',
+                  fontSize:10
+              },
+              ticks: {
+                 fontColor: "aqua",
+                 fontSize: 14
+                }
+          }],
+          yAxes: [{
+              display: true,
+              scaleLabel: {
+                  display: true,
+                  labelString: 'Price in Dollars',
+                  fontColor: '#000000',
+                  fontSize:10
+              },
+              ticks: {
+                    fontColor: "aqua",
+                    fontSize: 14
+              }
+          }]
+            },
           title: {
             display: true,
             text: "Bitcoin",
             fontSize: 20,
             fontColor:`rgb(0,255,255,1)`,
-            scales: {
-              yAxes: [{
-                fontColor:`rgb(0,255,255,1)`,
-                borderColor: `rgb(0,255,255,1)`,
-              }]
-          }
+            
           },
           legend: {
             display: true,
@@ -27,6 +53,7 @@ const GraphComponent = (props) => {
           }
         }}
       />
+      </div>
     );
   };
 

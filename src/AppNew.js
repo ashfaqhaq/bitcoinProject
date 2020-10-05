@@ -190,9 +190,9 @@ const AppNew = () => {
         </div>
 
       </div>
-
+            <div className="accent">
       <GraphComponent data={graphData} />
-
+      </div>
       
     </div>
     </div>
